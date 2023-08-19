@@ -1,2 +1,51 @@
-<h1>Parkings#park_car</h1>
-<p>Find me in app/views/parkings/park_car.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Park Car</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      margin: 0;
+    }
+    form {
+      background-color: #fff;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"], input[type="submit"] {
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Park Car</h1>
+  <%= form_for :parkings, url: park_car_parking_path, method: :post do |f| %>
+    <%= f.label :car_registration_number, "Car Registration Number:" %>
+    <%= f.text_field :car_registration_number %><br>
+
+    <%= f.label :car_color, "Car Color:" %>
+    <%= f.text_field :car_color %><br>
+
+    <%= f.submit "Park Car" %>
+  <% end %>
+</body>
+</html>

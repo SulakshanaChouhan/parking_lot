@@ -1,2 +1,75 @@
-<h1>Parkings#ticket_number_by_registration_number</h1>
-<p>Find me in app/views/parkings/ticket_number_by_registration_number.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ticket Number by Registration Number</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      margin: 0;
+    }
+    form {
+      background-color: #fff;
+      padding: 10px;
+      margin: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"], input[type="submit"] {
+      padding: 5px;
+      margin: 2px 0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      width: 100%;
+    }
+    p {
+      margin: 20px;
+    }
+    .back-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .back-link:hover {
+    background-color: #555;
+  }
+  </style>
+</head>
+<body>
+  <h1>Ticket Number by Registration Number</h1>
+
+  <%= form_tag ticket_number_by_registration_number_parking_path, method: :get do %>
+    <label for="car_registration_number">Enter Vehicle Number:</label><br>
+    <%= text_field_tag :car_registration_number %><br>
+    <%= submit_tag "Search" %>
+  <% end %>
+
+  <% if @ticket_numbers.present? %>
+    <ul>
+      <% @ticket_numbers.each do |ticket_number| %>
+        <li>Ticket Number: <%= ticket_number %></li>
+      <% end %>
+    </ul>
+    <%= link_to "Back to Parkings", parkings_path, class: "back-link"%>
+  <% elsif params[:car_registration_number].present? %>
+    <p>No ticket found for the entered registration number.</p>
+    <%= link_to "Back to Parkings", parkings_path, class: "back-link"%>
+  <% end %>
+</body>
+</html>

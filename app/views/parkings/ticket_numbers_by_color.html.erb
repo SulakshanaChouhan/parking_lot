@@ -1,2 +1,89 @@
-<h1>Parkings#ticket_numbers_by_color</h1>
-<p>Find me in app/views/parkings/ticket_numbers_by_color.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ticket Numbers by Car Color</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      margin: 0;
+    }
+    form {
+      background-color: #fff;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    }
+    label {
+      font-weight: bold;
+    }
+    select, input[type="submit"] {
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      width: 100%;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background-color: #fff;
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+    }
+    p {
+      margin: 20px;
+    }
+    .back-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .back-link:hover {
+    background-color: #555;
+  }
+  </style>
+</head>
+<body>
+  <h1>Ticket Numbers by Car Color</h1>
+
+  <%= form_tag ticket_numbers_by_color_parking_path, method: :get do %>
+    <label for="car_color">Select Color:</label>
+    <%= select_tag :car_color, options_for_select(Parking.valid.pluck(:car_color).uniq) %>
+    <%= submit_tag "Search" %>
+  <% end %>
+
+  <% if params[:car_color].present? %>
+    <% if @ticket_numbers.present? %>
+      <h2>Ticket Numbers of Cars with Color: <%= params[:car_color] %></h2>
+      <ul>
+        <% @ticket_numbers.each do |ticket_number| %>
+          <li><%= ticket_number %></li>
+        <% end %>
+      </ul>
+      <%= link_to "Back to Parkings", parkings_path, class: "back-link"%>
+    <% else %>
+      <p>No cars found for the selected color.</p>
+      <%= link_to "Back to Parkings", parkings_path, class: "back-link"%>
+    <% end %>
+  <% end %>
+</body>
+</html>
