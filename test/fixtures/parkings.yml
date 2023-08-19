@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  spot_assigned: 1
+  car_registration_number: MyString
+  car_color: MyString
+  is_active: false
+  ticket_number: MyString
+
+two:
+  spot_assigned: 1
+  car_registration_number: MyString
+  car_color: MyString
+  is_active: false
+  ticket_number: MyString
