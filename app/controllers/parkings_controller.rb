@@ -18,13 +18,7 @@ class ParkingsController < ApplicationController
   end
 
   def ticket_numbers_by_color
-    parkings = Parking.valid.where(car_color: params[:car_color])
-
-    if parkings.present?
-      @ticket_numbers = parkings.pluck(:ticket_number)
-    else
-      render json: { message: "No Parking Record found" }
-    end
+    @ticket_numbers = Parking.valid.where(car_color: params[:car_color]).pluck(:ticket_number)
   end
 
   def park_car
